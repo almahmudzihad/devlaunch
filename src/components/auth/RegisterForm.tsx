@@ -1,8 +1,44 @@
 "use client";
-
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema, RegisterFormData,} from "@/lib/registerSchema";
 import Link from "next/link";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { updateProfile } from "firebase/auth";
+import { auth } from "@/firebase/firebase.config";
 
 export default function RegisterForm() {
+    const { createUser } = useAuth();
+    const router = useRouter();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        } = useForm<RegisterFormData>({
+        resolver: zodResolver(registerSchema),
+    });
+    const onSubmit = async (data: RegisterFormData) => {
+    try {
+        await createUser(data.email, data.password);
+
+        // const result = await createUser(
+        //     data.email,
+        //     data.password
+        //     );
+
+        //     await updateProfile(result.user, {
+        //     displayName: data.name,
+        //     });
+
+            toast.success("Registration Successful!");
+
+            router.push("/");
+    } catch (error: any) {
+        toast.error(error.message);
+    }
+    };
   return (
     <div className="card w-full max-w-md bg-base-100 shadow-2xl">
       <div className="card-body">
@@ -15,7 +51,7 @@ export default function RegisterForm() {
           Join DevLaunch and start learning today.
         </p>
 
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
           <div>
             <label className="label">
@@ -23,10 +59,17 @@ export default function RegisterForm() {
             </label>
 
             <input
-              type="text"
-              placeholder="John Doe"
-              className="input input-bordered w-full"
-            />
+                type="text"
+                placeholder="John Doe"
+                className="input input-bordered w-full"
+                {...register("name")}
+                />
+
+                {errors.name && (
+                <p className="mt-1 text-sm text-error">
+                    {errors.name.message}
+                </p>
+                )}
           </div>
 
           <div>
@@ -35,10 +78,17 @@ export default function RegisterForm() {
             </label>
 
             <input
-              type="email"
-              placeholder="john@example.com"
-              className="input input-bordered w-full"
-            />
+                type="email"
+                placeholder="john@example.com"
+                className="input input-bordered w-full"
+                {...register("email")}
+                />
+
+                {errors.email && (
+                <p className="mt-1 text-sm text-error">
+                    {errors.email.message}
+                </p>
+                )}
           </div>
 
           <div>
@@ -47,10 +97,17 @@ export default function RegisterForm() {
             </label>
 
             <input
-              type="password"
-              placeholder="********"
-              className="input input-bordered w-full"
-            />
+                type="password"
+                placeholder="********"
+                className="input input-bordered w-full"
+                {...register("password")}
+                />
+
+                {errors.password && (
+                <p className="mt-1 text-sm text-error">
+                    {errors.password.message}
+                </p>
+                )}
           </div>
 
           <div>
@@ -61,15 +118,25 @@ export default function RegisterForm() {
             </label>
 
             <input
-              type="password"
-              placeholder="********"
-              className="input input-bordered w-full"
-            />
+                type="password"
+                placeholder="********"
+                className="input input-bordered w-full"
+                {...register("confirmPassword")}
+                />
+
+                {errors.confirmPassword && (
+                <p className="mt-1 text-sm text-error">
+                    {errors.confirmPassword.message}
+                </p>
+                )}
           </div>
 
-          <button className="btn btn-primary w-full mt-4">
+          <button
+            type="submit"
+            className="btn btn-primary w-full"
+            >
             Register
-          </button>
+            </button>
 
         </form>
 
