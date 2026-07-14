@@ -41,15 +41,15 @@ export default function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Follow Us</h3>
 
             <div className="flex gap-4">
-                <a href="#" className="hover:text-primary">
+                <a href="https://www.facebook.com/md.zihad.10" className="hover:text-primary">
                     <FaFacebook size={22} />
                 </a>
 
-                <a href="#" className="hover:text-primary">
+                <a href="https://github.com/almahmudzihad" className="hover:text-primary">
                     <FaGithub size={22} />
                 </a>
 
-                <a href="#" className="hover:text-primary">
+                <a href="https://www.linkedin.com/in/AlMahmudZihad" className="hover:text-primary">
                     <FaLinkedin size={22} />
                 </a>
                 </div>

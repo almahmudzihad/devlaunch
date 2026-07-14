@@ -6,7 +6,7 @@ DevLaunch is a modern online learning platform built with **Next.js 15**, **Reac
 
 ## 🌐 Live Demo
 
-🔗 Live Site: https://your-live-link.vercel.app
+🔗 Live Site: https://devlaunch-seven.vercel.app/
 
 ---
 
@@ -117,7 +117,7 @@ Install dependencies
 npm install
 ```
 
-Create a `.env.local` file and add your Firebase credentials.
+Create a `.env` file and add your Firebase credentials.
 
 Run the development server
 

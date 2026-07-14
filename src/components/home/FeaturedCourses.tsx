@@ -1,48 +1,35 @@
-const courses = [
-  {
-    id: 1,
-    title: "Full Stack Web Development",
-    category: "Web",
-    level: "Beginner",
-    duration: "12 Weeks",
-    students: "2.5K+",
-    image: "/images/course1.jpg",
-  },
-  {
-    id: 2,
-    title: "React & Next.js",
-    category: "Frontend",
-    level: "Intermediate",
-    duration: "8 Weeks",
-    students: "1.8K+",
-    image: "/images/course2.jpg",
-  },
-  {
-    id: 3,
-    title: "Node.js API Development",
-    category: "Backend",
-    level: "Intermediate",
-    duration: "10 Weeks",
-    students: "1.2K+",
-    image: "/images/course3.jpg",
-  },
-  {
-    id: 4,
-    title: "UI/UX Design",
-    category: "Design",
-    level: "Beginner",
-    duration: "6 Weeks",
-    students: "950+",
-    image: "/images/course4.jpg",
-  },
-];
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+import { getCourses } from "@/lib/courseStorage";
+import type { Course } from "@/data/courses";
 
 export default function FeaturedCourses() {
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    const allCourses = getCourses();
+
+    // Highest rated 4 courses
+    const featured = [...allCourses]
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 4);
+
+    setCourses(featured);
+  }, []);
+
   return (
     <section className="py-20 bg-base-100">
       <div className="mx-auto max-w-7xl px-4">
+
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold">Featured Courses</h2>
+          <h2 className="text-4xl font-bold">
+            Featured Courses
+          </h2>
+
           <p className="mt-3 text-base-content/70">
             Explore our most popular courses.
           </p>
@@ -50,35 +37,66 @@ export default function FeaturedCourses() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {courses.map((course) => (
-            <div key={course.id} className="card bg-base-100 shadow-xl">
+            <div
+              key={course.id}
+              className="card bg-base-100 shadow-xl border"
+            >
               <figure>
-                <img
+                <Image
                   src={course.image}
                   alt={course.title}
+                  width={500}
+                  height={300}
                   className="h-52 w-full object-cover"
                 />
               </figure>
 
               <div className="card-body">
+
                 <div className="badge badge-primary">
                   {course.category}
                 </div>
 
-                <h2 className="card-title">{course.title}</h2>
+                <h2 className="card-title">
+                  {course.title}
+                </h2>
 
-                <div className="text-sm opacity-70">
-                  {course.level} • {course.duration}
-                </div>
+                <p className="text-sm text-base-content/70">
+                  Instructor: {course.instructor}
+                </p>
 
-                <p>{course.students} Students</p>
+                <p>
+                  ⏱ {course.duration}
+                </p>
 
-                <button className="btn btn-primary mt-3">
+                <p>
+                  ⭐ {course.rating}
+                </p>
+
+                <p className="font-semibold text-primary">
+                  ${course.price}
+                </p>
+
+                <Link
+                  href={`/explore/${course.id}`}
+                  className="btn btn-primary mt-3"
+                >
                   View Details
-                </button>
+                </Link>
+
               </div>
             </div>
           ))}
         </div>
+
+      </div>
+      <div className="mt-12 flex justify-center">
+        <Link
+          href="/explore"
+          className="btn btn-primary btn-wide"
+        >
+          View All Courses
+        </Link>
       </div>
     </section>
   );

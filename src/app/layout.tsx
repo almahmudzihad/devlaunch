@@ -4,7 +4,11 @@ import Navbar from "@/components/layout/navbar/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Providers } from "@/context";
 import { Toaster } from "react-hot-toast";
+import { Inter } from "next/font/google";
 
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
    title: {
@@ -55,7 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <Providers>
           <Navbar />
           {children}
