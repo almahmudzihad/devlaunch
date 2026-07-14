@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { Course } from "@/data/courses";
 import {
   deleteCourse,
   getCourses,
 } from "@/lib/courseStorage";
+import AdminRoute from "@/components/auth/AdminRoute";
 
 export default function ManageCoursePage() {
   const [courseList, setCourseList] = useState<Course[]>([]);
@@ -26,7 +26,7 @@ export default function ManageCoursePage() {
   };
 
   return (
-    <ProtectedRoute>
+    <AdminRoute>
       <main className="mx-auto max-w-7xl px-4 py-12">
 
         <h1 className="text-3xl font-bold mb-8">
@@ -97,6 +97,6 @@ export default function ManageCoursePage() {
         )}
 
       </main>
-    </ProtectedRoute>
+    </AdminRoute>
   );
 }

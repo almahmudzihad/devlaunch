@@ -1,15 +1,31 @@
 # 🚀 DevLaunch
 
-DevLaunch is a modern online learning platform built with **Next.js 15**, **React 19**, **Firebase Authentication**, and **Tailwind CSS**. Users can explore courses, authenticate securely, and manage their own courses through a clean and responsive interface.
+DevLaunch is a modern online learning platform built with **Next.js 15**, **React 19**, **Firebase Authentication**, and **Tailwind CSS**. Users can explore courses, securely authenticate, browse available courses, and manage courses through a clean, responsive, and user-friendly interface.
 
 ---
 
 ## 🌐 Live Demo
 
-🔗 Live Site: https:
+🔗 Live Site: https://your-live-link.vercel.app
+
+---
+
 ## 📂 GitHub Repository
 
 🔗 https://github.com/almahmudzihad/skillbridge
+
+---
+
+## 👤 Demo Credentials
+
+### 🔑 Admin
+
+- **Email:** admin@gmail.com
+- **Password:** 12345678
+
+### 👤 User
+
+Users can create a new account using Email & Password or continue with Google Authentication.
 
 ---
 
@@ -17,21 +33,23 @@ DevLaunch is a modern online learning platform built with **Next.js 15**, **Reac
 
 - 🔐 Firebase Email & Password Authentication
 - 🔑 Google Sign In
+- 👨‍💼 Hardcoded Admin Authentication
 - 🛡️ Protected Routes
-- 📚 Browse Available Courses
+- 📚 Explore Available Courses
 - 🔍 Search Courses
-- 🗂️ Filter by Category
+- 🗂️ Category Filter
 - ↕️ Sort Courses
 - 📄 Course Details Page
-- ➕ Add New Course
-- 📝 Manage Added Courses
-- ❌ Delete Courses
+- ➕ Add New Course (Admin Only)
+- 📝 Manage Courses (Admin Only)
+- ❌ Delete Courses (Admin Only)
+- 👤 User Access Control
 - 📄 About Page
 - 📞 Contact Page
 - ⚠️ Custom 404 Page
 - 💀 Skeleton Loading UI
 - 📱 Fully Responsive Design
-- 🔎 SEO Metadata
+- 🔎 SEO Optimized Metadata
 
 ---
 
@@ -42,7 +60,7 @@ DevLaunch is a modern online learning platform built with **Next.js 15**, **Reac
 - Next.js 15 (App Router)
 - React 19
 - TypeScript
-- Tailwind CSS v4
+- Tailwind CSS
 - DaisyUI
 
 ### Authentication
@@ -50,22 +68,19 @@ DevLaunch is a modern online learning platform built with **Next.js 15**, **Reac
 - Firebase Authentication
 - Google Authentication
 
-### Form Validation
+### Form Handling
 
 - React Hook Form
-- Zod
+- Zod Validation
 
-### Charts
+### UI & Charts
 
 - Recharts
-
-### Notifications
-
 - React Hot Toast
 
 ---
 
-## 📁 Project Structure
+## 📁 Folder Structure
 
 ```text
 src/
@@ -84,16 +99,16 @@ src/
 
 ## ⚙️ Installation
 
-Clone the project
+Clone the repository
 
 ```bash
 git clone https://github.com/almahmudzihad/skillbridge.git
 ```
 
-Go to the project directory
+Navigate into the project
 
 ```bash
-cd devlaunch
+cd skillbridge
 ```
 
 Install dependencies
@@ -102,7 +117,7 @@ Install dependencies
 npm install
 ```
 
-Create a `.env.local` file and add your Firebase configuration.
+Create a `.env.local` file and add your Firebase credentials.
 
 Run the development server
 
@@ -116,38 +131,18 @@ Build the project
 npm run build
 ```
 
-Start production server
-
-```bash
-npm start
-```
-
 ---
 
 ## 🔐 Environment Variables
 
-Create a `.env.local` file.
-
 ```env
-NEXT_PUBLIC_FIREBASE_API_KEY=YOUR_KEY
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=YOUR_DOMAIN
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=YOUR_PROJECT_ID
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=YOUR_BUCKET
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=YOUR_SENDER_ID
-NEXT_PUBLIC_FIREBASE_APP_ID=YOUR_APP_ID
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
 ```
-
----
-
-## 📸 Screenshots
-
-You can add screenshots of:
-
-- Home Page
-- Explore Page
-- Course Details
-- Add Course
-- Manage Course
 
 ---
 
@@ -156,7 +151,8 @@ You can add screenshots of:
 **Al Mahmud Zihad**
 
 - GitHub: https://github.com/almahmudzihad
-- LinkedIn: https://linkedin.com/in/AlMahmudZihad
+- Portfolio: https://my-portfolio-six-roan-61.vercel.app/
+- LinkedIn: https://www.linkedin.com/in/AlMahmudZihad/
 
 ---
 

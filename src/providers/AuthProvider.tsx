@@ -25,6 +25,8 @@ export default function AuthProvider({
 }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const adminEmail = "admin@gmail.com";
+  const isAdmin = user?.email === adminEmail;
 
   // Register
   const createUser = (
@@ -80,6 +82,7 @@ export default function AuthProvider({
     loginUser,
     googleLogin,
     logoutUser,
+    isAdmin,
   };
 
   return (

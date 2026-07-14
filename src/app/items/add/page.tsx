@@ -1,6 +1,5 @@
 "use client";
 
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { addCourse } from "@/lib/courseStorage";
 import {
   courseSchema,
@@ -11,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import AdminRoute from "@/components/auth/AdminRoute";
 
 export default function AddCoursePage() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function AddCoursePage() {
   };
 
   return (
-    <ProtectedRoute>
+    <AdminRoute>
       <main className="mx-auto max-w-3xl px-4 py-12">
 
         <div className="card bg-base-100 shadow-xl border">
@@ -276,6 +276,6 @@ export default function AddCoursePage() {
         </div>
 
       </main>
-    </ProtectedRoute>
+    </AdminRoute>
   );
 }

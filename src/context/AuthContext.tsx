@@ -20,6 +20,7 @@ export interface AuthContextType {
   googleLogin: () => Promise<UserCredential>;
 
   logoutUser: () => Promise<void>;
+  isAdmin: boolean;
 }
 
 export const AuthContext =

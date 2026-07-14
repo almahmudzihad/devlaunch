@@ -9,7 +9,7 @@ import Logo from "./Logo";
 import useAuth from "@/hooks/useAuth";
 
 export default function Navbar() {
-  const { user, logoutUser } = useAuth();
+  const { user, logoutUser, isAdmin } = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -29,7 +29,11 @@ export default function Navbar() {
       </li>
 
       <li>
-        <Link href="/explore">Explore</Link>
+        {user ? (
+          <Link href="/explore">Explore</Link>
+        ) : (
+          <Link href="/login">Explore</Link>
+        )}
       </li>
 
       <li>
@@ -40,17 +44,17 @@ export default function Navbar() {
         <Link href="/contact">Contact</Link>
       </li>
 
-      {user && (
-        <>
-          <li>
-            <Link href="/items/add">Add Course</Link>
-          </li>
+      {isAdmin && (
+          <>
+            <li>
+              <Link href="/items/add">Add Course</Link>
+            </li>
 
-          <li>
-            <Link href="/items/manage">Manage Courses</Link>
-          </li>
-        </>
-      )}
+            <li>
+              <Link href="/items/manage">Manage Courses</Link>
+            </li>
+          </>
+        )}
     </>
   );
 
@@ -88,7 +92,7 @@ export default function Navbar() {
             {user ? (
               <>
                 <span className="hidden md:block font-semibold">
-                  {user.displayName || "User"}
+                  {isAdmin ? "Admin" : user?.displayName || "User"}
                 </span>
 
                 <button
