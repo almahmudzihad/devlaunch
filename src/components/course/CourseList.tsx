@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { courses } from "@/data/courses";
+import { useEffect, useMemo, useState } from "react";
+import { getCourses } from "@/lib/courseStorage";
 import CourseCard from "./CourseCard";
 
 export default function CourseList() {
@@ -9,11 +9,16 @@ export default function CourseList() {
   const [category, setCategory] = useState("All");
   const [sort, setSort] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [courseData, setCourseData] = useState<Course[]>([]);
+  useEffect(() => {
+    setCourseData(getCourses());
+    }, []);
+  
 
   const itemsPerPage = 8;
 
 const filteredCourses = useMemo(() => {
-  let data = [...courses];
+  let data = [...courseData];
 
   // Search
   if (search) {
@@ -43,7 +48,7 @@ const filteredCourses = useMemo(() => {
   }
 
   return data;
-}, [search, category, sort]);
+}, [courseData, search, category, sort]);
 const totalPages = Math.ceil(
   filteredCourses.length / itemsPerPage
 );
