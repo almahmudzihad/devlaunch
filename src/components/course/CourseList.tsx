@@ -8,42 +8,50 @@ export default function CourseList() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [sort, setSort] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredCourses = useMemo(() => {
-    let data = [...courses];
+  const itemsPerPage = 8;
 
-    // Search
-    if (search) {
-      data = data.filter((course) =>
-        course.title
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      );
-    }
+const filteredCourses = useMemo(() => {
+  let data = [...courses];
 
-    // Category Filter
-    if (category !== "All") {
-      data = data.filter(
-        (course) => course.category === category
-      );
-    }
+  // Search
+  if (search) {
+    data = data.filter((course) =>
+      course.title.toLowerCase().includes(search.toLowerCase())
+    );
+  }
 
-    // Sort
-    if (sort === "price-low") {
-      data.sort((a, b) => a.price - b.price);
-    }
+  // Category Filter
+  if (category !== "All") {
+    data = data.filter(
+      (course) => course.category === category
+    );
+  }
 
-    if (sort === "price-high") {
-      data.sort((a, b) => b.price - a.price);
-    }
+  // Sort
+  if (sort === "price-low") {
+    data.sort((a, b) => a.price - b.price);
+  }
 
-    if (sort === "rating") {
-      data.sort((a, b) => b.rating - a.rating);
-    }
+  if (sort === "price-high") {
+    data.sort((a, b) => b.price - a.price);
+  }
 
-    return data;
-  }, [search, category, sort]);
+  if (sort === "rating") {
+    data.sort((a, b) => b.rating - a.rating);
+  }
 
+  return data;
+}, [search, category, sort]);
+const totalPages = Math.ceil(
+  filteredCourses.length / itemsPerPage
+);
+
+const paginatedCourses = filteredCourses.slice(
+  (currentPage - 1) * itemsPerPage,
+  currentPage * itemsPerPage
+);
   return (
     <>
       {/* Controls */}
@@ -54,17 +62,19 @@ export default function CourseList() {
           placeholder="Search course..."
           className="input input-bordered w-full"
           value={search}
-          onChange={(e) =>
-            setSearch(e.target.value)
-          }
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setCurrentPage(1);
+            }}
         />
 
         <select
           className="select select-bordered"
           value={category}
-          onChange={(e) =>
-            setCategory(e.target.value)
-          }
+          onChange={(e) => {
+            setCategory(e.target.value);
+            setCurrentPage(1);
+            }}
         >
           <option>All</option>
           <option>Frontend</option>
@@ -77,9 +87,10 @@ export default function CourseList() {
         <select
           className="select select-bordered"
           value={sort}
-          onChange={(e) =>
-            setSort(e.target.value)
-          }
+          onChange={(e) => {
+            setSort(e.target.value);
+            setCurrentPage(1);
+            }}
         >
           <option value="">Sort By</option>
           <option value="price-low">
@@ -101,14 +112,29 @@ export default function CourseList() {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
-        {filteredCourses.map((course) => (
-          <CourseCard
+        {paginatedCourses.map((course) => (
+        <CourseCard
             key={course.id}
             course={course}
-          />
+        />
         ))}
 
       </div>
+      <div className="mt-10 flex justify-center gap-2">
+        {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+            key={index}
+            onClick={() => setCurrentPage(index + 1)}
+            className={`btn ${
+                currentPage === index + 1
+                ? "btn-primary"
+                : "btn-outline"
+            }`}
+            >
+            {index + 1}
+            </button>
+        ))}
+        </div>
     </>
   );
 }
